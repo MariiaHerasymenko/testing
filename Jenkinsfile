@@ -1,4 +1,4 @@
-node {
+node ("agent1") {
     stage("NodeJS setup") {
         env.NODEJS_HOME="${tool 'nodejs'}"
         env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
