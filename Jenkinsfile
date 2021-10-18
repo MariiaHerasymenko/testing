@@ -23,4 +23,17 @@ node {
         sh "tar --exclude='www/js' --exclude='www/css' --exclude='.git' -zcvf results.tar.gz *"
         archiveArtifacts artifacts: 'results.tar.gz', onlyIfSuccessful: true
     }
+    stage("Artifactory") {
+	rtUpload (
+	   serverId: "mariia-jfrog",
+	   spec: """{
+		"files": [
+		    {
+			"pattern": "results.tar.gz",
+			"target": "generic-local"
+		    }
+		]
+	   }"""
+	)
+     }
 }
